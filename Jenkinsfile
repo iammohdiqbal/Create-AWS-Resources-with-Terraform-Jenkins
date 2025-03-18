@@ -12,7 +12,11 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/iammohdiqbal/Create-AWS-Resources-with-Terraform-Jenkins.git'
+                script {
+                    dir("terraform") {
+                        git branch: 'main', url: "https://github.com/yeshwanthlm/Terraform-Jenkins.git"
+                    }
+                }
             }
         }
 
@@ -34,7 +38,7 @@ pipeline {
                 script {
                     def plan = readFile 'terraform/tfplan.txt'
                     input message: "Do you want to apply the plan?",
-                          parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
             }
         }
