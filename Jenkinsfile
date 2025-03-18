@@ -12,8 +12,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                 script{
-                        dir("terraform")
+              git branch: 'main',
                         {
                             git "https://github.com/iammohdiqbal/Create-AWS-Resources-with-Terraform-Jenkins.git"
                         }
